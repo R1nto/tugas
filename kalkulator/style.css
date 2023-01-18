@@ -1,0 +1,45 @@
+body {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.panel{
+    margin: 2rem;
+    justify-content: center;
+    align-items: center;
+}
+
+#tampil{
+    width: 500px;
+    padding: 10px;
+    font-size: large;
+    text-align: center;
+    background-color: whitesmoke;
+}
+
+.btn > button{
+    width: 100px;
+    height: 50px;
+    margin: 5px;
+    font-size: large;
+
+}
+.btn{
+    margin-bottom: 2rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-angka{
+    background-color: black;
+    color: wheat;
+}
+
+.btn-mat{
+    background-color: black;
+    color: orange;
+}
+
