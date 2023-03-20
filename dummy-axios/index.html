@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dummy-Axios</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <script src="app.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="row m-4">
+            <nav class="navbar navbar-dark bg-dark fixed-top">
+                <div class="container-fluid">
+                  <a class="navbar-brand" href="http://127.0.0.1:5500/index.html">Tugas Dummy Axios</a>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+                    <div class="offcanvas-header">
+                      <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Menu Pilihan</h5>
+                      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                      <ul class="navbar-nav justify-content-end flex-grow-1 pe-3"  id="menu">
+                        <li class="nav-item">
+                          <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
+                    </div>
+                  </div>
+                </div>
+              </nav>
+        <div class="row mt-4">
+            <div class="row mt-5">
+                <button type="button" class="btn btn-primary" id="barang" onclick="kategori()">List Barang</button>
+                <button type="button" class="btn btn-primary mt-2" id="pelanggan">List Pelanggan</button>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="mt-2" id="keranjang"></div>
+            <div class="mt-2" id="out"></div>
+        </div>
+
+        <div class="modal fade" id="example" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="titel">Tambah Data</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="mb-3">
+                      <label class="form-label">Title</label>
+                      <input type="text" class="form-control" id="ti" required aria-describedby="emailHelp">
+                      <div id="emailHelp" class="form-text">Harus di isi</div>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">Description</label>
+                      <input type="text" class="form-control" id="description" required>
+                      <div id="emailHelp" class="form-text">Harus di isi</div>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">Category</label>
+                      <select class="form-select" id="kate">
+  
+                      </select>
+                    </div>
+                    <button type="submit" id="submit" data-bs-dismiss="modal" onclick="insert()" class="btn btn-primary">Simpan</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+      </div>
+
+      <div class="modal fade" id="updatebarang" tabindex="-1" aria-labelledby="updatebarang" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" >Ubah Data</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="mb-3">
+                  <input type="text" hidden class="form-control" id="id" required aria-describedby="emailHelp">
+                  <label class="form-label">Title</label>
+                  <input type="text" class="form-control" id="tit" required aria-describedby="emailHelp">
+                  <div id="emailHelp" class="form-text">Harus di isi</div>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Description</label>
+                  <input type="text" class="form-control" id="deskripsi" required>
+                  <div id="emailHelp" class="form-text">Harus di isi</div>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Category</label>
+                  <select class="form-select" id="kateg">
+
+                  </select>
+                </div>
+                <button type="submit" id="submit" data-bs-dismiss="modal" onclick="update()" class="btn btn-primary">Simpan</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+   </div>
+   <div class="modal fade" id="insert" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="judul">Tambah Data</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+
+                <label class="form-label">Nama</label>
+                <input type="text" class="form-control" id="pel" required aria-describedby="emailHelp">
+                <div id="emailHelp" class="form-text">Harus di isi</div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Alamat</label>
+                <input type="text" class="form-control" id="alamat" required>
+                <div id="emailHelp" class="form-text">Harus di isi</div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Telp</label>
+                <input type="text" class="form-control" id="telp" required>
+                <div id="emailHelp" class="form-text">Harus di isi</div>
+              </div>
+              <button type="submit" id="Simpan" data-bs-dismiss="modal" onclick="insertPelanggan()" class="btn btn-primary">Simpan</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="updatepelanggan" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="judul">Ubah Data</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <input type="text" class="form-control" id="idpel" required aria-describedby="emailHelp" hidden>
+                <label class="form-label">Nama</label>
+                <input type="text" class="form-control" id="pela" required aria-describedby="emailHelp">
+                <div id="emailHelp" class="form-text">Harus di isi</div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Alamat</label>
+                <input type="text" class="form-control" id="ala" required>
+                <div id="emailHelp" class="form-text">Harus di isi</div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Telp</label>
+                <input type="text" class="form-control" id="telpon" required>
+                <div id="emailHelp" class="form-text">Harus di isi</div>
+              </div>
+              <button type="submit" id="Simpan" data-bs-dismiss="modal" onclick="updatePelanggan()" class="btn btn-primary">Simpan</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+</body>
+</html>
